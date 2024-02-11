@@ -2,7 +2,7 @@
 
  [![GitHub license](https://img.shields.io/github/license/gothinkster/laravel-realworld-example-app.svg)](https://raw.githubusercontent.com/gothinkster/laravel-realworld-example-app/master/LICENSE)
 
-> ### Example to Proxy API from [PunkAPI](https://https://punkapi.com).
+> ### Example to Proxy API from [PunkAPI](https://punkapi.com).
 
 This is a small application using Docker and Laravel to test Punk API.
 
