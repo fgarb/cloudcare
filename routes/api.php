@@ -1,7 +1,8 @@
 <?php
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\AuthController;
+use \App\Enum\TokenAbilityEnum;
+use \App\Http\Controllers\ProxyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ISSUE_ACCESS_TOKEN->value])->group(function () {
+    Route::get('/refresh-token', [AuthController::class, 'refreshToken']);
+});
+
+Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_API->value])->group(function () {
+    Route::get('/logout',[AuthController::class,'logout']);
+    Route::get('/proxy/{alias}',[ProxyController::class,'get']);
+});
+
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Route not found'], 404);
 });

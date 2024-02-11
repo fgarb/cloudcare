@@ -46,7 +46,10 @@ return [
     |
     */
 
+    // added access token and refresh token
     'expiration' => null,
+    'ac_expiration' => 30,              // 5 minutes
+    'rt_expiration' => 7 * 24 * 60,    // 7 days
 
     /*
     |--------------------------------------------------------------------------

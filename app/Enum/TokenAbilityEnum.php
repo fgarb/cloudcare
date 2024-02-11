@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Enums;
+namespace App\Enum;
 
-enum TokenAbility:string
+enum TokenAbilityEnum : string
 {
     case ISSUE_ACCESS_TOKEN = 'issue-access-token';
     case ACCESS_API = 'access-api';
