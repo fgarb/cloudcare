@@ -8,18 +8,31 @@ use Illuminate\Support\Facades\Http;
 
 class ProxyController extends Controller
 {
-
+    // the base URL of your API
     protected $baseUrl;
-    protected $getMethod;
 
+    // the GET Url of your API (only GET method supported)
+    protected $getUrl;
+
+    /**
+     * This is just an experiment I have done to call from this ProxyController every Controllers that is a subclass
+     * just by setting two variables
+     *
+     * @param Request $request
+     * @param $alias
+     * @return \Illuminate\Http\JsonResponse
+     * @throws ProxyAPIException
+     */
     final public function get(Request $request, $alias)
     {
         try{
             if (is_subclass_of($alias, $this::class)) {
                 $aliasController = new $alias();
-                $response = Http::baseUrl($aliasController->baseUrl)->get($aliasController->getMethod, $request);
-                //$response = $aliasController->getData($request, $alias);
+                $response = Http::baseUrl($aliasController->baseUrl)->get($aliasController->getUrl, $request);
+
                 if ($response->status() == 200){
+
+                    // should use a resource class defined in the controller or a model
                     $proxyResponse = [
                         'data' => json_decode($response->body())
                     ];
@@ -38,7 +51,4 @@ class ProxyController extends Controller
         }
     }
 
-    protected function getData(){
-
-    }
 }

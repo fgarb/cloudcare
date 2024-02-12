@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use \App\Enum\TokenAbilityEnum;
 use Carbon\Carbon;
-use App\Exceptions\ProxyAPIException;
 
 class AuthController extends Controller
 {
@@ -22,7 +21,14 @@ class AuthController extends Controller
         $request->validated($request->all());
 
         if (!Auth::attempt($request->only('username', 'password'))) {
-            return response()->json(['Invalid Credentials'], 401);
+            $errors = [];
+            $errors['credentials'][] = 'Invalid Credentials';
+            $response = [
+                'message' => 'The credentials you provided are not valid',
+                'errors' => $errors
+            ];
+            return response()->json($response, 401)
+                ->header('Content-Type', 'application/json');
         }
 
         $user = User::where('username', $request['username'])->first();
@@ -40,6 +46,12 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * Refresh Token: not yet implemented in Frontend
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function refreshToken(Request $request)
     {
         // since we are refreshing tokens, we delete all tokens and regenerate them
@@ -59,8 +71,16 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * Logout
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout()
     {
+        // since we are logging out, we delete all tokens and regenerate them
+        // this approach will logout a user from all devices
+        // better approach would use Laravel Passport to manage tokens
         Auth::user()->tokens()->delete();
         $response = [
             'message' => 'User logged out'

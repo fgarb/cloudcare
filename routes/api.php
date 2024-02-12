@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
 use \App\Enum\TokenAbilityEnum;
 use \App\Http\Controllers\ProxyController;
-
+use \App\Http\Controllers\BeerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,15 +15,19 @@ use \App\Http\Controllers\ProxyController;
 |
 */
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ISSUE_ACCESS_TOKEN->value])->group(function () {
-    Route::get('/refresh-token', [AuthController::class, 'refreshToken']);
+    Route::get('/auth/refresh-token', [AuthController::class, 'refreshToken']);
 });
 
 Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_API->value])->group(function () {
-    Route::get('/logout',[AuthController::class,'logout']);
+    Route::get('/auth/logout',[AuthController::class,'logout']);
+    // this is a test I have done...
     Route::get('/proxy/{alias}',[ProxyController::class,'get']);
+
+    // this is a more standard way
+    Route::get('/beers', [BeerController::class, 'getData']);
 });
 
 Route::fallback(function(){

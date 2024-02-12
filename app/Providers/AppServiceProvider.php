@@ -20,9 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        /*Http::macro('beers', function () {
+        Http::macro('beers', function () {
             return Http::baseUrl('https://api.punkapi.com/v2');
-        });*/
+        });
 
     }
 }

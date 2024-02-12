@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'guard' => ['web'],
+    /*'guard' => ['web'],*/
 
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
 
     // added access token and refresh token
     'expiration' => null,
-    'ac_expiration' => 30,              // 5 minutes
+    'ac_expiration' => 30,              // 30 minutes (just for testing purpose)
     'rt_expiration' => 7 * 24 * 60,    // 7 days
 
     /*
