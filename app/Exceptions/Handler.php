@@ -24,13 +24,6 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        /*$this->reportable(function (BeerAPIException $e) {
-            //return response()->json(['error' => $e->getMessage()], 500);
-        });*/
-
-        /*$this->reportable(function (MissingAbilityException $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        });*/
 
         $this->reportable(function (Throwable $e) {
             //

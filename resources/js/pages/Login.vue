@@ -2,7 +2,7 @@
     <div class="mx-auto w-4/12 mt-10 bg-indigo-50 p-4 rounded-lg">
         <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-2 flex flex-col">
             <h1 class="text-gray-600 py-3 font-bold text-3xl"> Login </h1>
-            <h3 class="text-gray-600 py-3 font-bold "> A fresh beer is waiting for you! </h3>
+            <h3 class="text-gray-600 py-3 font-bold "> A fresh beer is waiting for you guys! </h3>
             <form method="post" @submit.prevent="handleLogin">
                 <div class="mb-4">
                     <label class="block text-gray-600 text-sm font-bold mb-2" for="username">
@@ -34,6 +34,7 @@
 import { reactive, ref } from 'vue';
 import axios from 'axios';
 import {useRouter} from "vue-router";
+
 export default {
     setup() {
         const errors = ref()
@@ -42,9 +43,10 @@ export default {
             username: '',
             password: '',
         })
+
         const handleLogin = async () => {
             try {
-                const result = await axios.post('/api/auth/login', form)
+                const result = await axios.post('/api/v1/auth/login', form)
                 if (result.status === 200 && result.data && result.data.token) {
                     localStorage.setItem('APP_DEMO_USER_TOKEN', result.data.token)
                     await router.push('home')
@@ -61,7 +63,7 @@ export default {
         return {
             form,
             errors,
-            handleLogin,
+            handleLogin
         }
     }
 }

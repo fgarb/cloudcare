@@ -1,9 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\V1\AuthController;
 use \App\Enum\TokenAbilityEnum;
-use \App\Http\Controllers\ProxyController;
-use \App\Http\Controllers\BeerController;
+use \App\Http\Controllers\V1\ProxyController;
+use \App\Http\Controllers\V1\BeerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,13 +15,13 @@ use \App\Http\Controllers\BeerController;
 |
 */
 
-Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/v1/auth/login', [AuthController::class, 'login']);
 
-Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ISSUE_ACCESS_TOKEN->value])->group(function () {
+Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ISSUE_ACCESS_TOKEN->value])->prefix('v1')->group(function () {
     Route::get('/auth/refresh-token', [AuthController::class, 'refreshToken']);
 });
 
-Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_API->value])->group(function () {
+Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_API->value])->prefix('v1')->group(function () {
     Route::get('/auth/logout',[AuthController::class,'logout']);
     // this is a test I have done...
     Route::get('/proxy/{alias}',[ProxyController::class,'get']);

@@ -87,7 +87,7 @@ export default {
         const getBeers = async () => {
             isLoading.value = true
             try {
-                const req = await request('get', '/api/proxy/beers?page=1&per_page=30')
+                const req = await request('get', '/api/v1/proxy/beers?page=1&per_page=30')
                 beers.value = req.data.data
                 page.value = 1
                 hasData.value = true
@@ -101,7 +101,7 @@ export default {
             try {
                 page.value++;
                 isLoading.value = true;
-                const req = await request('get', `/api/proxy/beers?page=${page.value}&per_page=30`)
+                const req = await request('get', `/api/v1/proxy/beers?page=${page.value}&per_page=30`)
                 if (req.data.data.length > 0){
                     beers.value = req.data.data
                     hasData.value = true
@@ -121,7 +121,7 @@ export default {
             try {
                 page.value--;
                 isLoading.value = true;
-                const req = await request('get', `/api/proxy/beers?page=${page.value}&per_page=30`)
+                const req = await request('get', `/api/v1/proxy/beers?page=${page.value}&per_page=30`)
                 beers.value = req.data.data
                 isLoading.value = false;
                 hasData.value = true;
@@ -131,7 +131,7 @@ export default {
         }
 
         const handleLogout = async () => {
-            const req = await request('get', `/api/auth/logout`)
+            const req = await request('get', `/api/v1/auth/logout`)
             localStorage.removeItem('APP_DEMO_USER_TOKEN')
             router.push('/')
         }

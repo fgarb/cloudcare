@@ -182,9 +182,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'beers' => App\Http\Controllers\BeerController::class,
-        'pokemon' => App\Http\Controllers\PokemonCardsController::class,
-        // 'Example' => App\Facades\Example::class,
+        'beers' => App\Http\Controllers\V1\BeerController::class,
+        'pokemon' => App\Http\Controllers\V1\PokemonCardsController::class,
     ])->toArray(),
 
 ];

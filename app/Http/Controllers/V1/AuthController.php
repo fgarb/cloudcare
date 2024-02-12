@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
-use App\Http\Requests\LoginUserRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\LoginUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,7 @@ class AuthController extends Controller
                 'message' => 'The credentials you provided are not valid',
                 'errors' => $errors
             ];
-            return response()->json($response, 401)
-                ->header('Content-Type', 'application/json');
+            return response()->json($response, 401);
         }
 
         $user = User::where('username', $request['username'])->first();

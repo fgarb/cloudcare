@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const request = async (method, url, data) => {
+
     // Don't do this in production environment :)
     // I have done this because I didn't have time to implement token store in cookies
     const token = localStorage.getItem('APP_DEMO_USER_TOKEN')
