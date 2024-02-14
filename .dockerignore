@@ -1,0 +1,7 @@
+# Laravel
+node_modules
+storage/framework
+storage/logs
+vendor
+.git
+.env
