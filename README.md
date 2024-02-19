@@ -17,12 +17,4 @@ Frontend part lacks some features, like:
 ### Testing locally
 
 ----
-In order to run the web application on your local environment copy/paste the commands listed here:
 
-```
-git clone https://github.com/fgarb/cloudcare.git
-docker compose build
-docker compose up -d
-docker exec <your-container-name> php artisan migrate
-docker exec <your-container-name> php artisan db:seed
-```

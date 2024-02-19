@@ -12,7 +12,7 @@ services:
             - 80:8000
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         environment:
-            WWWUSER: 'www-data'
+            WWWUSER: 'sail'
             #LARAVEL_SAIL: 1
             #XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
             #XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
@@ -26,7 +26,7 @@ services:
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
+            - '${FORWARD_DB_PORT:-3307}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ROOT_HOST: '%'

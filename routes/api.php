@@ -24,9 +24,11 @@ Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ISSUE_ACCESS_T
 Route::middleware(['auth:sanctum', 'ability:' . TokenAbilityEnum::ACCESS_API->value])->prefix('v1')->group(function () {
     Route::get('/auth/logout',[AuthController::class,'logout']);
     // this is a test I have done...
-    Route::get('/proxy/{alias}',[ProxyController::class,'get']);
+    //Route::get('/proxy/{alias}',[ProxyController::class,'get']);
+    Route::get('/beers', [BeerController::class, 'get']);
+    Route::get('/pokemons', [\App\Http\Controllers\V1\PokemonCardsController::class, 'get']);
 
-    // this is a more standard way
+    // this is without using Traits
     Route::get('/beers', [BeerController::class, 'getData']);
 });
 

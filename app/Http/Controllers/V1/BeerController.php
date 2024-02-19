@@ -6,12 +6,14 @@ use App\Exceptions\ProxyAPIException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Throwable;
+use App\Http\Controllers\Controller;
+use App\Traits\ProxyTrait;
 
-class BeerController extends ProxyController
+class BeerController extends Controller
 {
 
     /**
-     * Starting from ProxyController you can set just these 2 properties for every new controller
+     * Starting from ProxyTrait you can set just these 2 properties for every new controller
      *
      * @see PokemonCardsController::$baseUrl
      * @see PokemonCardsController::$getUrl
@@ -21,7 +23,7 @@ class BeerController extends ProxyController
 
     /**
      * Gets Data from external API.
-     * @see ProxyController::get() to use another method to get the same result
+     * @see ProxyTrait::get() to use another method to get the same result
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
