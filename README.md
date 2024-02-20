@@ -18,3 +18,15 @@ Frontend part lacks some features, like:
 
 ----
 
+You can just clone the repo and build the image with:
+```
+docker-compose build
+```
+
+Then run
+```
+docker-compose up 
+```
+
+and you can access the application on http://localhost with user: root and password: password.
+There is a startup script waiting for mysql to be up and running before migrating and seeding the DB.

@@ -30,12 +30,15 @@ RUN php artisan config:cache && \
 #        && apt-get update
 
 #echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_VERSION.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
-RUN apt-get update \
-    && apt-get install -y nodejs \
-    && apt-get install -y npm \
-    && npm install -g npm \
-    && npm install -g pnpm \
-    && npm install -g bun
+
+#RUN apt-get update
+
+#RUN apt-get install -y nodejs \
+#    && apt-get install -y npm
+    #\
+    #&& npm install -g npm \
+    #&& npm install -g pnpm \
+    #&& npm install -g bun
 
 RUN chmod 777 -R /var/www/html/storage/ && \
     chown -R www-data:www-data /var/www/ && \
@@ -43,6 +46,6 @@ RUN chmod 777 -R /var/www/html/storage/ && \
 
 RUN chmod +x /usr/local/bin/start-container
 
-EXPOSE 8000
+EXPOSE 80
 
 ENTRYPOINT ["start-container"]
